@@ -1,29 +1,17 @@
-name: Steam Idle Bot
+name: Steam Idle
 on:
-  workflow_dispatch: # Кнопка ручного запуска
+  workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *' # Будет само перезапускаться каждые 6 часов, чтобы не вылетало
+    - cron: '0 */6 * * *'
 
 jobs:
-  build:
+  idle:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Steam Idle Action
+        uses: sst-scout/steam-idle-action@v1.0.3
         with:
-          repository: 'DoctorMcKay/Steam-Card-Farmer' # Качаем сам скрипт Доктора
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Farmer
-        env:
-          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
-        run: |
-          # Команда запуска скрипта Доктора Маккея
-          node main.js --username="$STEAM_USERNAME" --password="$STEAM_PASSWORD"
+          username: ${{ secrets.STEAM_USERNAME }}
+          password: ${{ secrets.STEAM_PASSWORD }}
+          # Впиши ID своей игры ниже (например, 730 для CS2)
+          appids: '236390'
