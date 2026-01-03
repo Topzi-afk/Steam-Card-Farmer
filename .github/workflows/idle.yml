@@ -1,0 +1,29 @@
+name: Steam Idle Bot
+on:
+  workflow_dispatch: # Кнопка ручного запуска
+  schedule:
+    - cron: '0 */6 * * *' # Будет само перезапускаться каждые 6 часов, чтобы не вылетало
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: 'DoctorMcKay/Steam-Card-Farmer' # Качаем сам скрипт Доктора
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Farmer
+        env:
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
+        run: |
+          # Команда запуска скрипта Доктора Маккея
+          node main.js --username="$STEAM_USERNAME" --password="$STEAM_PASSWORD"
