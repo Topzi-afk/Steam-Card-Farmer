@@ -1,8 +1,8 @@
 name: Steam Idle
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Кнопка для ручного запуска
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */6 * * *' # Будет само перезапускаться каждые 6 часов
 
 jobs:
   idle:
