@@ -1,17 +1,14 @@
 name: Steam Idle
 on:
-  workflow_dispatch: # Кнопка для ручного запуска
-  schedule:
-    - cron: '0 */6 * * *' # Будет само перезапускаться каждые 6 часов
+  workflow_dispatch:
 
 jobs:
   idle:
     runs-on: ubuntu-latest
     steps:
-      - name: Steam Idle Action
+      - name: Run Idle
         uses: sst-scout/steam-idle-action@v1.0.3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
           password: ${{ secrets.STEAM_PASSWORD }}
-          # Айди для War Thunder
           appids: '236390'
