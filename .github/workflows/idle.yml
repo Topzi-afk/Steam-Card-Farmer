@@ -13,5 +13,5 @@ jobs:
         with:
           username: ${{ secrets.STEAM_USERNAME }}
           password: ${{ secrets.STEAM_PASSWORD }}
-          # Впиши ID своей игры ниже (например, 730 для CS2)
+          # Айди для War Thunder
           appids: '236390'
